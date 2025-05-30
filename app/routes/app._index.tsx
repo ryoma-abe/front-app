@@ -1,5 +1,10 @@
 // サーバー側で商品を取得
-import { json, type LoaderFunctionArgs } from "@remix-run/node";
+import {
+  type ActionFunctionArgs,
+  json,
+  redirect,
+  type LoaderFunctionArgs,
+} from "@remix-run/node";
 import { Page, Card, Text } from "@shopify/polaris";
 import { useLoaderData } from "@remix-run/react";
 import { authenticate } from "app/shopify.server";
@@ -27,6 +32,47 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const products = result.data.products.edges.map((edge: any) => edge.node);
 
   return json({ products });
+}
+
+//メタフィールドに書き込み
+export async function action({ request }: ActionFunctionArgs) {
+  const { admin } = await authenticate.admin(request);
+  const formData = await request.formData();
+
+  const productId = formData.get("productId")?.toString();
+  const note = formData.get("note")?.toString();
+
+  if (!productId || !note) return redirect("/");
+
+  const mutation = `
+    mutation set($metafields: [MetafieldsSetInput!]!) {
+      metafieldsSet(metafields: $metafields) {
+        metafields {
+          id
+          value
+        }
+        userErrors {
+          field
+          message
+        }
+      }
+    }
+  `;
+
+  const variables = {
+    metafields: [
+      {
+        ownerId: productId,
+        namespace: "demo",
+        key: "note",
+        type: "single_line_text_field",
+        value: note,
+      },
+    ],
+  };
+
+  await admin.graphql(mutation, { variables });
+  return redirect("/app");
 }
 
 // フロント側で表示
