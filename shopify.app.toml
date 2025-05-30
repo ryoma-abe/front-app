@@ -3,7 +3,7 @@
 client_id = "45db2794b9ee31dcde5920b07ec1e14e"
 name = "front-app"
 handle = "front-app-3"
-application_url = "https://counted-dancing-irrigation-teens.trycloudflare.com"
+application_url = "https://map-lan-suits-critics.trycloudflare.com"
 embedded = true
 
 [build]
@@ -27,9 +27,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://counted-dancing-irrigation-teens.trycloudflare.com/auth/callback",
-  "https://counted-dancing-irrigation-teens.trycloudflare.com/auth/shopify/callback",
-  "https://counted-dancing-irrigation-teens.trycloudflare.com/api/auth/callback"
+  "https://map-lan-suits-critics.trycloudflare.com/auth/callback",
+  "https://map-lan-suits-critics.trycloudflare.com/auth/shopify/callback",
+  "https://map-lan-suits-critics.trycloudflare.com/api/auth/callback"
 ]
 
 [pos]
