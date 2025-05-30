@@ -4,13 +4,7 @@ import { Page, Card, Text } from "@shopify/polaris";
 import { useLoaderData } from "@remix-run/react";
 import { authenticate } from "app/shopify.server";
 import WriteMeta from "../components/WriteMeta";
-
-// 商品の型定義
-interface Product {
-  id: string;
-  title: string;
-  handle: string;
-}
+import { type Product } from "app/types/product";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const { admin } = await authenticate.admin(request);
