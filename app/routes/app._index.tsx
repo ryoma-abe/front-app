@@ -1,9 +1,16 @@
 // サーバー側で商品を取得
-import { json, LoaderFunctionArgs } from "@remix-run/node";
+import { json, type LoaderFunctionArgs } from "@remix-run/node";
 import { Page, Card, Text } from "@shopify/polaris";
 import { useLoaderData } from "@remix-run/react";
 import { authenticate } from "app/shopify.server";
 import WriteMeta from "../components/WriteMeta";
+
+// 商品の型定義
+interface Product {
+  id: string;
+  title: string;
+  handle: string;
+}
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const { admin } = await authenticate.admin(request);
@@ -39,7 +46,7 @@ export default function Index() {
           商品一覧
         </Text>
         <ul>
-          {products.map((product, i) => (
+          {products.map((product: Product, i: number) => (
             <li key={product.id}>
               {product.title}
               {i}
