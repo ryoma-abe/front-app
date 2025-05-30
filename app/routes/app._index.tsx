@@ -77,7 +77,6 @@ export async function action({ request }: ActionFunctionArgs) {
 // フロント側で表示
 export default function Index() {
   const { products } = useLoaderData<typeof loader>();
-  const [number, setNumber] = useState(0);
 
   return (
     <Page>
@@ -96,13 +95,7 @@ export default function Index() {
       </Card>
       <Card>
         <Form method="post">
-          <input
-            type="text"
-            name="choice"
-            placeholder="何番目の商品にしますか？"
-          />
-          <br />
-          <input type="hidden" name="productId" value={products[0].id} />
+          <input type="number" name="productId" value={products[0].id} />
           <input name="note" type="text" placeholder="メモを入力" />
           <button type="submit">送信</button>
         </Form>
