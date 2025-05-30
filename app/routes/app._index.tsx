@@ -1,14 +1,9 @@
 // サーバー側で商品を取得
-import {
-  ActionFunctionArgs,
-  json,
-  LoaderFunctionArgs,
-  redirect,
-} from "@remix-run/node";
+import { json, LoaderFunctionArgs } from "@remix-run/node";
 import { Page, Card, Text } from "@shopify/polaris";
-import { Form, useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 import { authenticate } from "app/shopify.server";
-import { useState } from "react";
+import WriteMeta from "./components/WriteMeta";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const { admin } = await authenticate.admin(request);
@@ -32,52 +27,10 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
   return json({ products });
 }
-//メタフィールドに書き込み
-
-export async function action({ request }: ActionFunctionArgs) {
-  const { admin } = await authenticate.admin(request);
-  const formData = await request.formData();
-
-  const productId = formData.get("productId")?.toString();
-  const note = formData.get("note")?.toString();
-
-  if (!productId || !note) return redirect("/");
-
-  const mutation = `
-    mutation set($metafields: [MetafieldsSetInput!]!) {
-      metafieldsSet(metafields: $metafields) {
-        metafields {
-          id
-          value
-        }
-        userErrors {
-          field
-          message
-        }
-      }
-    }
-  `;
-
-  const variables = {
-    metafields: [
-      {
-        ownerId: productId,
-        namespace: "demo",
-        key: "note",
-        type: "single_line_text_field",
-        value: note,
-      },
-    ],
-  };
-
-  await admin.graphql(mutation, { variables });
-  return redirect("/");
-}
 
 // フロント側で表示
 export default function Index() {
   const { products } = useLoaderData<typeof loader>();
-  const [number, setNumber] = useState(0);
 
   return (
     <Page>
@@ -94,19 +47,7 @@ export default function Index() {
           ))}
         </ul>
       </Card>
-      <Card>
-        <Form method="post">
-          <input
-            type="text"
-            name="choice"
-            placeholder="何番目の商品にしますか？"
-          />
-          <br />
-          <input type="hidden" name="productId" value={products[0].id} />
-          <input name="note" type="text" placeholder="メモを入力" />
-          <button type="submit">送信</button>
-        </Form>
-      </Card>
+      <WriteMeta />
     </Page>
   );
 }
