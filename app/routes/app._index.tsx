@@ -10,27 +10,11 @@ import { useLoaderData } from "@remix-run/react";
 import { authenticate } from "app/shopify.server";
 import WriteMeta from "../components/WriteMeta";
 import { type Product } from "app/types/product";
+import { fetchProducts } from "app/lib/fetchProducts";
 
-export async function loader({ request }: LoaderFunctionArgs) {
-  const { admin } = await authenticate.admin(request);
-  // 商品取得
-  const response = await admin.graphql(`
-    {
-      products(first: 10) {
-        edges {
-          node {
-            id
-            title
-            handle
-          }
-        }
-      }
-    }
-  `);
-
-  const result = await response.json();
-  const products = result.data.products.edges.map((edge: any) => edge.node);
-
+// 商品を10件取得
+export async function loader(args: LoaderFunctionArgs) {
+  const products = await fetchProducts(args);
   return json({ products });
 }
 
