@@ -1,0 +1,11 @@
+{
+  "ratings": {
+    "stars": {
+      "label": "評価"
+    },
+    "home": {
+      "recommendationText": "おすすめ商品です！",
+      "noRecommendationText": "あまりおすすめできません。。。"
+    }
+  }
+}

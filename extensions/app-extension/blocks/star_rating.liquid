@@ -1,0 +1,43 @@
+{% assign avg_rating = block.settings.product.metafields.demo.avg_rating.value | round %}
+{% assign colors = "red,blue,green" | split: "," %}
+
+{% for color in colors %}
+  <p>{{ color }}</p>
+{% endfor %}
+
+<span style="color:{{ block.settings.colorr }}">
+  {% render 'stars'
+    , rating: avg_rating %}
+</span>
+{% if avg_rating >= 4 %}
+  <br>
+  <img
+    src="{{ "thumbs-up.png" | asset_img_url: '15x' }}"
+    height="15"
+    width="15"
+    loading="lazy">
+  {{ 'ratings.home.recommendationText' | t }}
+  {% else if avg_rating <= 2 %}
+  <br>
+  {{ 'ratings.home.noRecommendationText' | t }}
+  {% endif %}
+
+{% schema %}
+  {
+    "name": "Star Rating",
+    "target": "section",
+    "settings": [
+      {
+        "type": "product",
+        "id": "product",
+        "label": "商品",
+        "autofill": true
+      }, {
+        "type": "color",
+        "id": "colorr",
+        "label": "星の色",
+        "default": "#ff0000"
+      }
+    ]
+  }
+{% endschema %}
