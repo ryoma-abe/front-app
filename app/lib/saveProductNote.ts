@@ -1,7 +1,7 @@
-import { redirect, type ActionFunctionArgs } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 import { authenticate } from "app/shopify.server";
 
-export async function saveProductNote({ request }: ActionFunctionArgs) {
+export async function saveProductNote(request: Request) {
   const { admin } = await authenticate.admin(request);
   const formData = await request.formData();
 
@@ -38,5 +38,4 @@ export async function saveProductNote({ request }: ActionFunctionArgs) {
   };
 
   await admin.graphql(mutation, { variables });
-  return redirect("/app");
 }
