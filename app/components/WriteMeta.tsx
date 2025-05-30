@@ -3,6 +3,7 @@ import { Form, useLoaderData } from "@remix-run/react";
 import { Card } from "@shopify/polaris";
 import { authenticate } from "app/shopify.server";
 import { type loader } from "../routes/app._index";
+import { type Product } from "app/types/product";
 
 //メタフィールドに書き込み
 export async function action({ request }: ActionFunctionArgs) {
@@ -51,7 +52,7 @@ export default function WriteMeta() {
     <Card>
       <Form method="post" action=".">
         <select name="productId">
-          {products.map((product, i) => (
+          {products.map((product: Product, i: number) => (
             <option key={product.id} value={product.id}>
               {product.title}
             </option>
