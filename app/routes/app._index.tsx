@@ -3,7 +3,7 @@ import { json, LoaderFunctionArgs } from "@remix-run/node";
 import { Page, Card, Text } from "@shopify/polaris";
 import { useLoaderData } from "@remix-run/react";
 import { authenticate } from "app/shopify.server";
-import WriteMeta from "./components/WriteMeta";
+import WriteMeta from "../components/WriteMeta";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const { admin } = await authenticate.admin(request);

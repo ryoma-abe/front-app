@@ -2,7 +2,7 @@ import { ActionFunctionArgs, redirect } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
 import { Card } from "@shopify/polaris";
 import { authenticate } from "app/shopify.server";
-import { loader } from "../app._index";
+import { loader } from "../routes/app._index";
 
 //メタフィールドに書き込み
 export async function action({ request }: ActionFunctionArgs) {
