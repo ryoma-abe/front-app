@@ -8,6 +8,7 @@ import {
 import { Page, Card, Text } from "@shopify/polaris";
 import { Form, useLoaderData } from "@remix-run/react";
 import { authenticate } from "app/shopify.server";
+import { useState } from "react";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const { admin } = await authenticate.admin(request);
@@ -76,6 +77,7 @@ export async function action({ request }: ActionFunctionArgs) {
 // フロント側で表示
 export default function Index() {
   const { products } = useLoaderData<typeof loader>();
+  const [number, setNumber] = useState(0);
 
   return (
     <Page>
