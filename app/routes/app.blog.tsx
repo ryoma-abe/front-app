@@ -1,5 +1,11 @@
+import { Card, Page } from "@shopify/polaris";
+
 export default function blog() {
   return (
-    <div>BlogPage</div>
-  )
+    <Page>
+      <Card>
+        <p>BlogPage</p>
+      </Card>
+    </Page>
+  );
 }
