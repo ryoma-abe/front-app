@@ -3,7 +3,7 @@
 client_id = "45db2794b9ee31dcde5920b07ec1e14e"
 name = "front-app"
 handle = "front-app-3"
-application_url = "https://vatican-stretch-forum-halloween.trycloudflare.com"
+application_url = "https://thesaurus-scenic-prix-pupils.trycloudflare.com"
 embedded = true
 
 [build]
@@ -27,9 +27,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://vatican-stretch-forum-halloween.trycloudflare.com/auth/callback",
-  "https://vatican-stretch-forum-halloween.trycloudflare.com/auth/shopify/callback",
-  "https://vatican-stretch-forum-halloween.trycloudflare.com/api/auth/callback"
+  "https://thesaurus-scenic-prix-pupils.trycloudflare.com/auth/callback",
+  "https://thesaurus-scenic-prix-pupils.trycloudflare.com/auth/shopify/callback",
+  "https://thesaurus-scenic-prix-pupils.trycloudflare.com/api/auth/callback"
 ]
 
 [pos]
