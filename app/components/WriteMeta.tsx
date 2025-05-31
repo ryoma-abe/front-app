@@ -1,7 +1,7 @@
 import { Form, useLoaderData } from "@remix-run/react";
 import { Card } from "@shopify/polaris";
 import { type loader } from "../routes/app._index";
-import { type Product } from "app/types/product";
+import { type Product } from "app/types/Product";
 
 export default function WriteMeta() {
   const { products } = useLoaderData<typeof loader>();
