@@ -8,7 +8,7 @@ import {
 import { Page, Card, Text } from "@shopify/polaris";
 import { useLoaderData } from "@remix-run/react";
 import WriteMeta from "../components/WriteMeta";
-import { type Product } from "app/types/product";
+import { type Product } from "app/types/Product";
 import { fetchProducts } from "app/lib/fetchProducts";
 import { saveProductNote } from "app/lib/saveProductNote";
 
@@ -43,6 +43,7 @@ export default function Index() {
           ))}
         </ul>
       </Card>
+
       <WriteMeta />
     </Page>
   );
